@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('/fonts/geist-sans.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/geist-mono.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #FBFBFA;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dark html,
+.dark body,
+html.dark,
+html.dark body {
+  background: #141413;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 116, 0.25);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 116, 0.4);
+}
+
+@layer components {
+  /* Cards: flat, 1px border, no heavy shadow — per minimalist-ui protocol */
+  .card {
+    @apply bg-white dark:bg-[#1C1C1A] border border-line dark:border-white/10 rounded-card;
+  }
+
+  .card-hover {
+    @apply transition-shadow duration-200;
+  }
+  .card-hover:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-control bg-ink dark:bg-white px-4 py-2 text-sm font-medium text-white dark:text-ink transition-all hover:bg-[#333333] dark:hover:bg-white/90 active:scale-[0.98] disabled:opacity-30 disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-control border border-line dark:border-white/15 bg-white dark:bg-transparent px-4 py-2 text-sm font-medium text-ink-soft dark:text-white/80 transition-all hover:bg-bone-100 dark:hover:bg-white/5 active:scale-[0.98] disabled:opacity-30 disabled:pointer-events-none;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-control px-2.5 py-1.5 text-xs font-medium text-ink-muted transition-colors hover:bg-bone-100 dark:hover:bg-white/5 hover:text-ink dark:hover:text-white disabled:opacity-25 disabled:pointer-events-none;
+  }
+
+  .btn-ghost-danger {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-control px-2.5 py-1.5 text-xs font-medium text-[#9F2F2D] transition-colors hover:bg-[#FDEBEC] dark:hover:bg-[#9F2F2D]/15;
+  }
+
+  .input-field {
+    @apply w-full rounded-control border border-line dark:border-white/15 bg-white dark:bg-white/5 px-3 py-2 text-sm text-ink dark:text-white placeholder:text-ink-faint focus:outline-none focus:ring-1 focus:ring-ink dark:focus:ring-white/40 focus:border-ink dark:focus:border-white/40 transition-shadow;
+  }
+
+  .select-field {
+    @apply w-full rounded-control border border-line dark:border-white/15 bg-white dark:bg-white/5 px-3 py-2 text-sm text-ink dark:text-white focus:outline-none focus:ring-1 focus:ring-ink dark:focus:ring-white/40 transition-shadow;
+  }
+
+  /* Pill tags — small, uppercase, wide tracking, pastel backgrounds only */
+  .tag {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider;
+  }
+
+  .tag-red { @apply bg-[#FDEBEC] text-[#9F2F2D]; }
+  .tag-blue { @apply bg-[#E1F3FE] text-[#1F6C9F]; }
+  .tag-green { @apply bg-[#EDF3EC] text-[#346538]; }
+  .tag-yellow { @apply bg-[#FBF3DB] text-[#956400]; }
+  .tag-neutral { @apply bg-bone-200 dark:bg-white/10 text-ink-muted dark:text-white/50; }
+
+  kbd {
+    @apply inline-flex items-center justify-center rounded border border-line dark:border-white/15 bg-bone-100 dark:bg-white/5 px-1.5 py-0.5 font-mono text-[10px] text-ink-muted;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(148, 148, 140, 0.1) 25%, rgba(148, 148, 140, 0.2) 37%, rgba(148, 148, 140, 0.1) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.6s ease infinite;
+}
+
+/* Accessibility: honor reduced motion / transparency / contrast preferences (apple-design skill) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
