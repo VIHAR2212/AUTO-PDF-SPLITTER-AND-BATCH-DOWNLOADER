@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Smart PDF Experiment Splitter",
+  "short_name": "PDF Splitter",
+  "version": "1.0.0",
+  "description": "Automatically detects experiments, assignments, chapters or custom sections inside PDF/DOCX manuals and splits them into individually named files. 100% local — no upload, no server, no API.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Smart PDF Experiment Splitter",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "settings.html",
+  "permissions": ["storage", "downloads", "unlimitedStorage", "identity"],
+  "host_permissions": ["https://www.googleapis.com/*"],
+  "oauth2": {
+    "client_id": "YOUR_OAUTH_CLIENT_ID.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/drive.file"]
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*", "tesseract/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "minimum_chrome_version": "116"
+}
